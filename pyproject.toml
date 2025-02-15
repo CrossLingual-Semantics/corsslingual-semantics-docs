@@ -1,0 +1,16 @@
+[project]
+name = "swow-enhanced"
+version = "0.1.0"
+description = "Pipeline to enhance swow in various languages"
+authors = [
+    {name = "Kabir Manandhar Shrestha, Geordie Zhang, Lea Fremann, Chunhua Liu, Simon De Deyne"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
