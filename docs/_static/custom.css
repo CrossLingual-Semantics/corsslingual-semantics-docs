@@ -1,14 +1,24 @@
-/* Make the content area wider */
+/* Make the content area fill the entire width and height */
 .wy-nav-content {
-    max-width: 90% !important; /* Increase width (default is ~750px) */
+    max-width: 100% !important;  /* Expand full width */
+    min-height: 100vh; /* Ensures full viewport height */
+    margin: 0 auto; /* Center the content */
+    padding: 20px; /* Prevents content from touching edges */
 }
 
-/* Adjust table width */
+/* Make tables fully responsive */
 .wy-table-responsive table {
-    width: 100% !important;
+    width: 100% !important; /* Allow tables to stretch */
 }
 
 /* Improve sidebar readability */
 .wy-nav-side {
-    background: #1e1e1e;  /* Dark theme for sidebar */
+    background: #1e1e1e; /* Dark sidebar */
+    height: 100vh; /* Make sidebar full height */
+}
+
+/* Adjust body layout to ensure full height usage */
+html, body {
+    height: 100%;
+    overflow-x: hidden; /* Prevents horizontal scroll */
 }
