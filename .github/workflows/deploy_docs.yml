@@ -3,7 +3,7 @@ name: Deploy Sphinx Docs
 on:
   push:
     branches:
-      - docs-deployment  # Change this to docs-deployment for testing, later change to main.
+      - main  # Change this to docs-deployment for testing, later change to main.
 
 jobs:
   deploy:
