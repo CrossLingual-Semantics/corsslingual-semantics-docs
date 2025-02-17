@@ -27,5 +27,11 @@ jobs:
         run: poetry run sphinx-build -b html docs docs/_build/html
 
       - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          poetry run ghp-import -n -p -f docs/_build/html -b gh-pages
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          poetry run ghp-import -n -f docs/_build/html -b gh-pages
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git gh-pages --force
+      
