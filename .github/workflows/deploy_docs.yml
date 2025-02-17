@@ -3,7 +3,7 @@ name: Deploy Sphinx Docs
 on:
   push:
     branches:
-      - docs-deployment  # Change this to "docs-deployment" until testing is done.
+      - docs-deployment  # Change this to docs-deployment for testing, later change to main.
 
 jobs:
   deploy:
@@ -28,4 +28,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: |
-          poetry run ghp-import -n -p -f docs/_build/html
+          poetry run ghp-import -n -p -f docs/_build/html -b gh-pages
