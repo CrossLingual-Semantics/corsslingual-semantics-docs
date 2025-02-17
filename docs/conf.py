@@ -37,3 +37,5 @@ html_theme_options = {
     "collapse_navigation": False,  # Expand sidebar sections
 }
 html_static_path = ['_static']
+html_css_files = ["custom.css"]
+
