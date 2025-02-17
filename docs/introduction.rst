@@ -1,28 +1,28 @@
-Introduction
-============
+📌 Introduction
+==============
 
-### Overview of the CrossLingual Alignment Collaboration
+### 🌍 Overview of the CrossLingual Alignment Collaboration
 
-The **CrossLingual Alignment Collaboration** aims to explore and analyze **semantic relationships between words across languages** using **Small World of Words (SWOW)** data. Our goal is to improve **cross-lingual semantic equivalence** through structured **word associations** instead of relying solely on pretrained models.
+The **CrossLingual Alignment Collaboration** explores **semantic relationships between words across languages** using **Small World of Words (SWOW)** data.
 
-This collaboration is structured into three key phases:
+🎯 **Our Goal:**  
+To improve **cross-lingual semantic equivalence** using structured **word associations** instead of only relying on pretrained models.
 
-1. **Building the Pipeline**  
-   - Utilizing **SWOW data** to extract cross-lingual word associations.
-   - Defining **semantic similarity** based on associations instead of direct embeddings.
+🔹 **Project Phases:**
+1. **🛠️ Building the Pipeline**  
+   - Extracting **cross-lingual word associations** from SWOW.
+   - Defining **semantic similarity metrics**.
+   
+2. **📊 Developing a Web Interface**  
+   - Using **Plotly-based visualizations**.
+   - Integrating into **Squiz Matrix CMS** for university research.
 
-2. **Developing a Web Interface**  
-   - Creating a **Plotly-based dashboard** that integrates into a **university CMS (Squiz Matrix)**.
-   - Ensuring **intuitive visualization of word associations**.
+3. **📄 Research & Publication**  
+   - Enhancing the SWOW dataset with **linguistic annotations**.
+   - Comparing **association-based embeddings vs. pretrained embeddings**.
+   - Publishing findings in NLP & Linguistics venues.
 
-3. **Research & Publication**  
-   - Documenting the methodology and **enhanced SWOW dataset**.
-   - Comparing **association-based embeddings** with traditional word embeddings.
-   - Publishing findings in NLP & linguistics conferences.
-
-This initiative prioritizes **interpretability**, ensuring **cross-lingual comparisons remain transparent and explainable**. By integrating **BabelNet**, we enhance the dataset with linguistic dimensions, including:
-- **Parts of Speech (POS)**
-- **Lexical relations**
-- **Sense mapping for better alignment**.
-
-In the next section, we discuss how we **enhance SWOW for better multilingual comparison**.
+🧠 **Key Technologies Used:**
+- SWOW Dataset
+- BabelNet (for sense mapping & POS tagging)
+- Python (Sphinx, NLP libraries)

@@ -13,7 +13,12 @@ author = 'Kabir, Geordie, Lea, Chunhua, Simon'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser"]
+# Enable better typography and layout
+extensions = [
+    "myst_parser",  # Markdown support
+    "sphinx_rtd_theme"
+]
+
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
@@ -23,5 +28,12 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+# Use the ReadTheDocs theme
+html_theme = "sphinx_rtd_theme"
+
+# Additional configurations for visuals
+html_theme_options = {
+    "navigation_depth": 3,  # Show deeper navigation levels
+    "collapse_navigation": False,  # Expand sidebar sections
+}
 html_static_path = ['_static']
