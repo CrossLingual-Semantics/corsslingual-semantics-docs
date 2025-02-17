@@ -6,8 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'SWOW Enhance Documentation'
-copyright = '2025, Kabir, Geordie, Lea, Chunhua, Simon'
+project = 'Collaboration Documentation'
+copyright = '2025, MIT License'
 author = 'Kabir, Geordie, Lea, Chunhua, Simon'
 
 # -- General configuration ---------------------------------------------------
