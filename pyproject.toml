@@ -19,4 +19,5 @@ build-backend = "poetry.core.masonry.api"
 myst-parser = "^4.0.1"
 ghp-import = "^2.1.0"
 sphinx-rtd-theme = "^3.0.2"
+sphinx = "^8.1.3"
 
