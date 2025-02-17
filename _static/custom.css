@@ -1,1 +1,14 @@
-/* This file intentionally left blank. */
+/* Make the content area wider */
+.wy-nav-content {
+    max-width: 90% !important; /* Increase width (default is ~750px) */
+}
+
+/* Adjust table width */
+.wy-table-responsive table {
+    width: 100% !important;
+}
+
+/* Improve sidebar readability */
+.wy-nav-side {
+    background: #1e1e1e;  /* Dark theme for sidebar */
+}
