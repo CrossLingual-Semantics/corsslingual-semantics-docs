@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌐 Enhancing SWOW &mdash; Collaboration Documentation  documentation</title>
+  <title>🌐 SWOW Enhancement Pipeline &mdash; Collaboration Documentation  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5fd91e7" />
@@ -45,20 +45,20 @@
               <p class="caption" role="heading"><span class="caption-text">📖 Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">📌 Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">🌐 Enhancing SWOW</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#implementation-steps">🛠️ Implementation Steps</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#extracting-word-associations">1️⃣ <strong>Extracting Word Associations</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#integrating-babelnet-data">2️⃣ <strong>Integrating BabelNet Data</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#enriching-cues-and-associations">3️⃣ <strong>Enriching Cues and Associations</strong></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">🌐 SWOW Enhancement Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#core-classes">Core Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dimension-class">📏 <strong>1. Dimension Class</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#association-class">🔗 <strong>2. Association Class</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cue-class">🎵 <strong>3. Cue Class</strong></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-output">📊 Example Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#expected-outcomes">✅ Expected Outcomes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-the-pipeline">📄 Running the Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#testing-the-pipeline">🧪 Testing the Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#conclusion">📚 Conclusion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#next-steps">🔗 <strong>Next Steps</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-aggregation">Data Aggregation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#babelnet-enhancement">BabelNet Enhancement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-generation">Output Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pipeline-execution">Pipeline Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expected-output">Expected Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-pipeline">Running the Pipeline</a></li>
 </ul>
 </li>
 </ul>
@@ -77,7 +77,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">🌐 Enhancing SWOW</li>
+      <li class="breadcrumb-item active">🌐 SWOW Enhancement Pipeline</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/enhancing_swow.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -87,32 +87,204 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="enhancing-swow">
-<h1>🌐 Enhancing SWOW<a class="headerlink" href="#enhancing-swow" title="Link to this heading"></a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>The <strong>Small World of Words (SWOW) dataset</strong> is a large-scale lexical association dataset used to understand <strong>semantic alignment across languages</strong>. However, it lacks:
-- <strong>Explicit linguistic relationships</strong> (e.g., part of speech)
-- <strong>Context-aware cross-lingual mappings</strong></p>
-<p>💡 <strong>Our Solution:</strong> We enhance SWOW with additional linguistic dimensions using the BabelNet API:</p>
+  <section id="swow-enhancement-pipeline">
+<h1>🌐 SWOW Enhancement Pipeline<a class="headerlink" href="#swow-enhancement-pipeline" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The <strong>Small World of Words (SWOW) dataset</strong> captures <strong>word associations</strong> through a <strong>cue-response paradigm</strong>. Each cue word elicits <strong>three responses</strong> (R1, R2, R3) from participants, revealing semantic relationships between words.</p>
+<p><strong>Input CSV Example:</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>cue</p></th>
+<th class="head"><p>R1</p></th>
+<th class="head"><p>R2</p></th>
+<th class="head"><p>R3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>music</p></td>
+<td><p>notes</p></td>
+<td><p>band</p></td>
+<td><p>rhythm</p></td>
+</tr>
+<tr class="row-odd"><td><p>book</p></td>
+<td><p>pages</p></td>
+<td><p>author</p></td>
+<td><p>story</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Goal:</strong> Enhance SWOW by adding <strong>linguistic dimensions</strong> to both cues and associations:</p>
 <ol class="arabic simple">
-<li><p><strong>Parts of Speech (POS) Annotation:</strong> Categorizes word associations grammatically.</p></li>
-<li><p><strong>Lexical Relations:</strong> Identifies synonyms, antonyms, and hypernyms.</p></li>
-<li><p><strong>Sense Mapping:</strong> Resolves word ambiguities through BabelNet synsets.</p></li>
+<li><p><strong>POS:</strong> Part of Speech (e.g., NOUN, VERB)</p></li>
+<li><p><strong>Relations:</strong> Lexical relations (e.g., synonym, hypernym)</p></li>
+<li><p><strong>Sense:</strong> BabelNet sense (ID and gloss description)</p></li>
 </ol>
 <p>—</p>
 </section>
-<section id="implementation-steps">
-<h2>🛠️ Implementation Steps<a class="headerlink" href="#implementation-steps" title="Link to this heading"></a></h2>
-<section id="extracting-word-associations">
-<h3>1️⃣ <strong>Extracting Word Associations</strong><a class="headerlink" href="#extracting-word-associations" title="Link to this heading"></a></h3>
-<p>The first step involves parsing the SWOW dataset into cues and associations.</p>
+<section id="core-classes">
+<h2>Core Classes<a class="headerlink" href="#core-classes" title="Link to this heading"></a></h2>
+<p>The enhancement pipeline relies on three core classes: <strong>Dimension</strong>, <strong>Association</strong>, and <strong>Cue</strong>.</p>
+<ol class="arabic simple">
+<li><p><strong>Dimension Class:</strong> Represents metadata (POS, Relation, Sense).</p></li>
+<li><p><strong>Association Class:</strong> Represents words associated with cues.</p></li>
+<li><p><strong>Cue Class:</strong> Represents the main word with associations.</p></li>
+</ol>
+<p>—</p>
+<section id="dimension-class">
+<h3>📏 <strong>1. Dimension Class</strong><a class="headerlink" href="#dimension-class" title="Link to this heading"></a></h3>
+<p><strong>File:</strong> <cite>swow_pipeline/models/dimension.py</cite></p>
+<p><strong>Purpose:</strong> Represents metadata associated with a word (POS, Relation, Sense).</p>
+<p><strong>Key Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Dimension</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for linguistic dimensions like POS, Relation, and Sense.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">POS</span><span class="p">(</span><span class="n">Dimension</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Part-of-Speech Dimension.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;POS&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Relation</span><span class="p">(</span><span class="n">Dimension</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lexical Relation Dimension.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Relation&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Sense</span><span class="p">(</span><span class="n">Dimension</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sense Mapping Dimension (BabelNet ID and gloss).&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Sense&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Example Output for “music”:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;POS&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NOUN&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Relation&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;has_part&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sense&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bn:00060282n: sound art form&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>—</p>
+</section>
+<section id="association-class">
+<h3>🔗 <strong>2. Association Class</strong><a class="headerlink" href="#association-class" title="Link to this heading"></a></h3>
+<p><strong>File:</strong> <cite>swow_pipeline/models/association.py</cite></p>
+<p><strong>Purpose:</strong> Represents an <strong>association</strong> word linked to a cue, along with its <strong>frequency</strong> and <strong>dimensions</strong>.</p>
+<p><strong>Key Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">.dimension</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dimension</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Association</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Association class representing word associations with dimensions.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word</span> <span class="o">=</span> <span class="n">word</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span> <span class="o">=</span> <span class="n">frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="p">:</span> <span class="n">Dimension</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dimension</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dimension</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">word</span><span class="p">,</span>
+            <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span><span class="p">,</span>
+            <span class="s2">&quot;dimensions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">dim</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">]</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example Output for `”band”` (association of `”music”`):</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;band&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;POS&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NOUN&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Relation&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;member_of&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sense&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bn:00010774n: musical group&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>—</p>
+</section>
+<section id="cue-class">
+<h3>🎵 <strong>3. Cue Class</strong><a class="headerlink" href="#cue-class" title="Link to this heading"></a></h3>
+<p><strong>File:</strong> <cite>swow_pipeline/models/cue.py</cite></p>
+<p><strong>Purpose:</strong> Represents a <strong>cue word</strong>, its <strong>associations</strong>, and enriched <strong>dimensions</strong>.</p>
+<p><strong>Key Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">.association</span><span class="w"> </span><span class="kn">import</span> <span class="n">Association</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.dimension</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dimension</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Cue</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cue class representing a cue word with associations and dimensions.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word</span> <span class="o">=</span> <span class="n">word</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">associations</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_association</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">associations</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">associations</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">Association</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">frequency</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="p">:</span> <span class="n">Dimension</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dimension</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dimension</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">word</span><span class="p">,</span>
+            <span class="s2">&quot;associations&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">word</span><span class="p">:</span> <span class="n">assoc</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">assoc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">associations</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+            <span class="s2">&quot;dimensions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">dim</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">]</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example Output for Cue `”music”`:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;music&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;associations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;notes&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;band&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;band&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;POS&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NOUN&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sense&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bn:00060282n: sound art form&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>—</p>
+</section>
+</section>
+<section id="data-aggregation">
+<h2>Data Aggregation<a class="headerlink" href="#data-aggregation" title="Link to this heading"></a></h2>
 <p><strong>File:</strong> <cite>swow_pipeline/aggregator.py</cite></p>
+<p><strong>Purpose:</strong> Parses the input <strong>SWOW CSV</strong> into <cite>Cue</cite> and <cite>Association</cite> objects.</p>
+<p><strong>Algorithm:</strong></p>
+<ol class="arabic">
+<li><p>Read the input CSV using <cite>pandas</cite>.</p></li>
+<li><p>For each row:
+- Create a <cite>Cue</cite> object.
+- For <cite>R1</cite>, <cite>R2</cite>, <cite>R3</cite> responses:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Create <cite>Association</cite> objects with word and frequency.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Store each <cite>Cue</cite> and its <cite>Associations</cite> in a dictionary.</p></li>
+</ol>
+<p><strong>Key Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">swow_pipeline.models.cue</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cue</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">aggregate_csv</span><span class="p">(</span><span class="n">input_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Aggregate SWOW CSV into Cue objects with associations.&quot;&quot;&quot;</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span>
     <span class="n">cue_dict</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -131,10 +303,20 @@
 </div>
 <p>—</p>
 </section>
-<section id="integrating-babelnet-data">
-<h3>2️⃣ <strong>Integrating BabelNet Data</strong><a class="headerlink" href="#integrating-babelnet-data" title="Link to this heading"></a></h3>
-<p>Using the BabelNet API, we enrich each cue and association with dimensions such as <strong>POS</strong>, <strong>Relations</strong>, and <strong>Senses</strong>.</p>
+<section id="babelnet-enhancement">
+<h2>BabelNet Enhancement<a class="headerlink" href="#babelnet-enhancement" title="Link to this heading"></a></h2>
 <p><strong>File:</strong> <cite>swow_pipeline/enhancer.py</cite></p>
+<p><strong>Purpose:</strong> Enhances each <strong>cue</strong> and <strong>association</strong> with <strong>POS</strong>, <strong>Relations</strong>, and <strong>Sense Mapping</strong> using the BabelNet API.</p>
+<p><strong>Algorithm:</strong></p>
+<ol class="arabic simple">
+<li><p>Query BabelNet for:
+- <strong>POS:</strong> Part of speech for the word.
+- <strong>Relations:</strong> Semantic connections (synonyms, hypernyms).
+- <strong>Sense:</strong> Synset ID and gloss.</p></li>
+<li><p>Filter out duplicates.</p></li>
+<li><p>Attach the enriched dimensions.</p></li>
+</ol>
+<p><strong>Key Code:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">babelnet</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bn</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">babelnet.language</span><span class="w"> </span><span class="kn">import</span> <span class="n">Language</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">swow_pipeline.models.dimension</span><span class="w"> </span><span class="kn">import</span> <span class="n">POS</span><span class="p">,</span> <span class="n">Relation</span><span class="p">,</span> <span class="n">Sense</span>
@@ -144,22 +326,23 @@
     <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># Part-of-Speech (POS)</span>
+        <span class="c1"># 1. Part-of-Speech (POS)</span>
         <span class="n">senses</span> <span class="o">=</span> <span class="n">bn</span><span class="o">.</span><span class="n">get_senses</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">from_langs</span><span class="o">=</span><span class="p">[</span><span class="n">Language</span><span class="o">.</span><span class="n">EN</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">senses</span><span class="p">:</span>
             <span class="n">dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">POS</span><span class="p">(</span><span class="n">senses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
 
-        <span class="c1"># Synset Relations</span>
+        <span class="c1"># 2. Synset Relations (First Synset)</span>
         <span class="n">synsets</span> <span class="o">=</span> <span class="n">bn</span><span class="o">.</span><span class="n">get_synsets</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">from_langs</span><span class="o">=</span><span class="p">[</span><span class="n">Language</span><span class="o">.</span><span class="n">EN</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">synsets</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">synsets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">outgoing_edges</span><span class="p">():</span>
-                <span class="n">dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relation</span><span class="p">(</span><span class="n">edge</span><span class="o">.</span><span class="n">pointer</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+                <span class="n">relation_name</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">pointer</span><span class="o">.</span><span class="n">name</span>
+                <span class="k">if</span> <span class="n">relation_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dim</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">Relation</span><span class="p">)]:</span>
+                    <span class="n">dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relation</span><span class="p">(</span><span class="n">relation_name</span><span class="p">))</span>
 
-        <span class="c1"># Sense Mapping</span>
-        <span class="k">if</span> <span class="n">synsets</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">synset</span> <span class="ow">in</span> <span class="n">synsets</span><span class="p">:</span>
-                <span class="n">gloss</span> <span class="o">=</span> <span class="n">synset</span><span class="o">.</span><span class="n">main_gloss</span><span class="p">(</span><span class="n">Language</span><span class="o">.</span><span class="n">EN</span><span class="p">)</span><span class="o">.</span><span class="n">gloss</span> <span class="k">if</span> <span class="n">synset</span><span class="o">.</span><span class="n">main_gloss</span><span class="p">(</span><span class="n">Language</span><span class="o">.</span><span class="n">EN</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;No gloss available&quot;</span>
-                <span class="n">dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Sense</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">synset</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">gloss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="c1"># 3. Sense Mapping</span>
+        <span class="k">for</span> <span class="n">synset</span> <span class="ow">in</span> <span class="n">synsets</span><span class="p">:</span>
+            <span class="n">gloss</span> <span class="o">=</span> <span class="n">synset</span><span class="o">.</span><span class="n">main_gloss</span><span class="p">(</span><span class="n">Language</span><span class="o">.</span><span class="n">EN</span><span class="p">)</span><span class="o">.</span><span class="n">gloss</span> <span class="k">if</span> <span class="n">synset</span><span class="o">.</span><span class="n">main_gloss</span><span class="p">(</span><span class="n">Language</span><span class="o">.</span><span class="n">EN</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;No gloss&quot;</span>
+            <span class="n">dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Sense</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">synset</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">gloss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error enhancing &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -169,66 +352,100 @@
 </div>
 <p>—</p>
 </section>
-<section id="enriching-cues-and-associations">
-<h3>3️⃣ <strong>Enriching Cues and Associations</strong><a class="headerlink" href="#enriching-cues-and-associations" title="Link to this heading"></a></h3>
-<p>We enrich the cue word and its associations with dimensions during processing.</p>
-<p><strong>File:</strong> <cite>swow_pipeline/models/cue.py</cite></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">.association</span><span class="w"> </span><span class="kn">import</span> <span class="n">Association</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.dimension</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dimension</span>
+<section id="output-generation">
+<h2>Output Generation<a class="headerlink" href="#output-generation" title="Link to this heading"></a></h2>
+<p><strong>File:</strong> <cite>swow_pipeline/output.py</cite></p>
+<p><strong>Purpose:</strong> Exports the enriched dataset as <strong>JSON</strong> and <strong>JSON with Metadata</strong>.</p>
+<p><strong>Key Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">Cue</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cue class representing a cue word with its associations and dimensions.&quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">word</span> <span class="o">=</span> <span class="n">word</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">associations</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_to_json</span><span class="p">(</span><span class="n">cue_dict</span><span class="p">,</span> <span class="n">output_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Export to clean JSON without metadata.&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">cue</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">cue</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">cue_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">json_file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_association</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">associations</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">associations</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">Association</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">frequency</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_to_json_with_metadata</span><span class="p">(</span><span class="n">cue_dict</span><span class="p">,</span> <span class="n">output_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Export JSON with metadata.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">object_to_dict</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;__class__&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                <span class="s2">&quot;__module__&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span>
+            <span class="p">}</span>
+        <span class="k">return</span> <span class="n">obj</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="p">:</span> <span class="n">Dimension</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dimension</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">word</span><span class="p">,</span>
-            <span class="s2">&quot;associations&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">word</span><span class="p">:</span> <span class="n">assoc</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">assoc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">associations</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
-            <span class="s2">&quot;dimensions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">dim</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">]</span>
-        <span class="p">}</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">cue</span><span class="p">:</span> <span class="n">object_to_dict</span><span class="p">(</span><span class="n">cue_obj</span><span class="p">)</span> <span class="k">for</span> <span class="n">cue</span><span class="p">,</span> <span class="n">cue_obj</span> <span class="ow">in</span> <span class="n">cue_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">json_file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>—</p>
 </section>
+<section id="pipeline-execution">
+<h2>Pipeline Execution<a class="headerlink" href="#pipeline-execution" title="Link to this heading"></a></h2>
+<p><strong>File:</strong> <cite>main.py</cite></p>
+<p><strong>Purpose:</strong> Orchestrates the <strong>aggregation</strong>, <strong>enhancement</strong>, and <strong>export</strong> process.</p>
+<p><strong>Algorithm:</strong></p>
+<ol class="arabic simple">
+<li><p>Aggregate <cite>Cue</cite> and <cite>Association</cite> objects.</p></li>
+<li><p>Enhance with <cite>POS</cite>, <cite>Relations</cite>, and <cite>Senses</cite>.</p></li>
+<li><p>Export to JSON.</p></li>
+</ol>
+<p><strong>Key Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">swow_pipeline.aggregator</span><span class="w"> </span><span class="kn">import</span> <span class="n">aggregate_csv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">swow_pipeline.enhancer</span><span class="w"> </span><span class="kn">import</span> <span class="n">enhance_word</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">swow_pipeline.output</span><span class="w"> </span><span class="kn">import</span> <span class="n">export_to_json</span><span class="p">,</span> <span class="n">export_to_json_with_metadata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">input_csv</span><span class="p">,</span> <span class="n">output_json</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_json_with_metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">cue_dict</span> <span class="o">=</span> <span class="n">aggregate_csv</span><span class="p">(</span><span class="n">input_csv</span><span class="p">)</span>
+
+    <span class="c1"># Sample if specified</span>
+    <span class="k">if</span> <span class="n">sample_size</span><span class="p">:</span>
+        <span class="n">sample_cues</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cue_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="nb">min</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cue_dict</span><span class="p">)))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sample_cues</span> <span class="o">=</span> <span class="n">cue_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+
+    <span class="c1"># Enhance sample cues and associations</span>
+    <span class="k">for</span> <span class="n">cue</span> <span class="ow">in</span> <span class="n">sample_cues</span><span class="p">:</span>
+        <span class="n">cue</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">enhance_word</span><span class="p">(</span><span class="n">cue</span><span class="o">.</span><span class="n">word</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">assoc</span> <span class="ow">in</span> <span class="n">cue</span><span class="o">.</span><span class="n">associations</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">assoc</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">enhance_word</span><span class="p">(</span><span class="n">assoc</span><span class="o">.</span><span class="n">word</span><span class="p">))</span>
+
+    <span class="c1"># Export results</span>
+    <span class="k">if</span> <span class="n">output_json</span><span class="p">:</span>
+        <span class="n">export_to_json</span><span class="p">(</span><span class="n">cue_dict</span><span class="p">,</span> <span class="n">output_json</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">output_json_with_metadata</span><span class="p">:</span>
+        <span class="n">export_to_json_with_metadata</span><span class="p">(</span><span class="n">cue_dict</span><span class="p">,</span> <span class="n">output_json_with_metadata</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Enhance SWOW dataset with BabelNet dimensions.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--input&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the input CSV file&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--output_json&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to clean JSON output&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--output_json_with_metadata&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to metadata JSON output&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--sample_size&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of sample cues to enhance&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output_json</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output_json_with_metadata</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">sample_size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>—</p>
 </section>
-<section id="example-output">
-<h2>📊 Example Output<a class="headerlink" href="#example-output" title="Link to this heading"></a></h2>
-<p>The following JSON output shows a cue word (“music”) enriched with associations and metadata.</p>
-<p><strong>Output JSON Example:</strong></p>
+<section id="expected-output">
+<h2>Expected Output<a class="headerlink" href="#expected-output" title="Link to this heading"></a></h2>
+<p><strong>Example Output for Cue `”music”`:</strong></p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;music&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;associations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;notes&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;POS&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NOUN&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Relation&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;has_part&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sense&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bn:00079715n: musical notation&quot;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">      </span><span class="p">]</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;band&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;band&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;POS&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NOUN&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Relation&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;member_of&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sense&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bn:00010774n: musical group&quot;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">      </span><span class="p">]</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;notes&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;band&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;band&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nt">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;POS&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NOUN&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Relation&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;has_part&quot;</span><span class="w"> </span><span class="p">},</span>
 <span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sense&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bn:00060282n: sound art form&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
@@ -236,75 +453,17 @@
 </div>
 <p>—</p>
 </section>
-<section id="expected-outcomes">
-<h2>✅ Expected Outcomes<a class="headerlink" href="#expected-outcomes" title="Link to this heading"></a></h2>
-<ol class="arabic simple">
-<li><p><strong>Multilingual SWOW Dataset:</strong> Enhanced with <strong>POS</strong>, <strong>Relations</strong>, and <strong>Senses</strong>.</p></li>
-<li><p><strong>Semantic Alignment:</strong> Improved understanding of word associations across languages.</p></li>
-<li><p><strong>Public Repository:</strong> Code and enriched dataset available for further research.</p></li>
-</ol>
-<p>—</p>
-</section>
 <section id="running-the-pipeline">
-<h2>📄 Running the Pipeline<a class="headerlink" href="#running-the-pipeline" title="Link to this heading"></a></h2>
-<ol class="arabic simple">
-<li><p>Ensure <cite>babelnet_conf.yml</cite> is configured with your BabelNet API key.</p></li>
-</ol>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">RESTFUL_KEY</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;your-api-key-here&#39;</span>
-<span class="nt">RESTFUL_URL</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://babelnet.io/v9/service&#39;</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="2">
-<li><p>Run the SWOW enhancement pipeline:</p></li>
-</ol>
+<h2>Running the Pipeline<a class="headerlink" href="#running-the-pipeline" title="Link to this heading"></a></h2>
+<p><strong>Command:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>main.py<span class="w"> </span>--input<span class="w"> </span>data/swow_sample.csv<span class="w"> </span>--output_json<span class="w"> </span>output/clean_swow.json<span class="w"> </span>--output_json_with_metadata<span class="w"> </span>output/enhanced_swow.json<span class="w"> </span>--sample_size<span class="w"> </span><span class="m">100</span>
 </pre></div>
 </div>
 <p>—</p>
-</section>
-<section id="testing-the-pipeline">
-<h2>🧪 Testing the Pipeline<a class="headerlink" href="#testing-the-pipeline" title="Link to this heading"></a></h2>
-<p>Tests are implemented using <cite>pytest</cite> to ensure BabelNet integration and output validity.</p>
-<p><strong>File:</strong> <cite>tests/test_enhancer.py</cite></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">swow_pipeline.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cue</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">swow_pipeline.enhancer</span><span class="w"> </span><span class="kn">import</span> <span class="n">enhance_word</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_enhance_word</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test enhancing word with BabelNet.&quot;&quot;&quot;</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;music&quot;</span>
-    <span class="n">dimensions</span> <span class="o">=</span> <span class="n">enhance_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">dimensions</span><span class="p">,</span> <span class="s2">&quot;Enhancement failed.&quot;</span>
-    <span class="k">assert</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;POS&quot;</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Relation&quot;</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Sense&quot;</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Run tests with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/
-</pre></div>
-</div>
-<p>—</p>
-</section>
-<section id="conclusion">
-<h2>📚 Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
-<p>The <strong>Enhanced SWOW Pipeline</strong> enriches word associations with interpretable linguistic dimensions. This approach provides:</p>
-<ul class="simple">
-<li><p><strong>Cross-lingual alignment</strong> through BabelNet senses.</p></li>
-<li><p><strong>Semantic clarity</strong> using POS and lexical relations.</p></li>
-<li><p><strong>Efficient, scalable enrichment</strong> for multilingual word similarity studies.</p></li>
-</ul>
-<p>—</p>
-</section>
-<section id="next-steps">
-<h2>🔗 <strong>Next Steps</strong><a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
-<ol class="arabic simple">
-<li><p><strong>Expand Language Support:</strong> Extend enhancement to non-English SWOW datasets.</p></li>
-<li><p><strong>Add More Dimensions:</strong> Incorporate affective meanings and conceptual hierarchies.</p></li>
-<li><p><strong>Visualization:</strong> Create dashboards to explore enriched associations.</p></li>
-</ol>
-<p>—</p>
-<p>📥 <strong>Repository:</strong> [GitHub - Enhance SWOW](<a class="reference external" href="https://github.com/CrossLingual-Semantics/Enhance_SWOW">https://github.com/CrossLingual-Semantics/Enhance_SWOW</a>)</p>
+<p>🎯 <strong>Outcome:</strong>
+1. <strong>Enhanced SWOW Dataset:</strong> Cues and associations with POS, Relations, and Sense.
+2. <strong>Cross-lingual Insights:</strong> Understand how word associations vary across languages.
+3. <strong>Interpretability:</strong> Semantically aligned datasets for downstream NLP tasks.</p>
 </section>
 </section>
 
