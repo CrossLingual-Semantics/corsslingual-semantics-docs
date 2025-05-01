@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage Guide &mdash; Collaboration Documentation  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5fd91e7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Enhancer Module — Detailed Walk-through" href="enhancer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Collaboration Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#environment-setup">Environment setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enhancer.html">Enhancer Module — Detailed Walk-through</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#tf-idf-synset-ranking">TF-IDF Synset Ranking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#text-translation-helpers">Text &amp; Translation Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#main-enhancer-function">Main Enhancer Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#csv-sme-annotation">CSV &amp; SME Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#babelnet-synset-background">BabelNet Synset Background</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-invocation">Command-Line Invocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cache-behavior">Cache Behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Collaboration Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Usage Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage-guide">
+<h1>Usage Guide<a class="headerlink" href="#usage-guide" title="Link to this heading"></a></h1>
+<p>This document shows how to run the SWOW Enhancement Pipeline from the command line, describes each option, and gives a few worked examples.</p>
+<section id="command-line-invocation">
+<h2>Command-Line Invocation<a class="headerlink" href="#command-line-invocation" title="Link to this heading"></a></h2>
+<p>The main entry point is the <cite>enhanceswow</cite> (or <cite>process</cite>) command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>enhanceswow<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>&lt;SWOW_CSV&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">[</span>--annotation_csv<span class="w"> </span>&lt;ANNOTATION_CSV&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">[</span>--output_json<span class="w"> </span>&lt;CLEAN_JSON&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">[</span>--output_json_with_metadata<span class="w"> </span>&lt;META_JSON&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">[</span>--sample_size<span class="w"> </span>&lt;N&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">[</span>--force<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">[</span>--start<span class="w"> </span>&lt;I&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">[</span>--end<span class="w"> </span>&lt;J&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">[</span>--languages<span class="w"> </span>&lt;EN,ZH,…&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">[</span>--language_code<span class="w"> </span>&lt;en<span class="p">|</span>zh<span class="p">|</span>nl<span class="p">|</span>…&gt;<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--input</span> <span class="pre">&lt;SWOW_CSV&gt;</span></code></p></td>
+<td><p>Path to the raw SWOW CSV file (required).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--annotation_csv</span> <span class="pre">&lt;ANNOTATION_CSV&gt;</span></code></p></td>
+<td><p>Path to the SME annotation CSV (optional).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--output_json</span> <span class="pre">&lt;CLEAN_JSON&gt;</span></code></p></td>
+<td><p>Where to save the filtered JSON output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--output_json_with_metadata</span> <span class="pre">&lt;META_JSON&gt;</span></code></p></td>
+<td><p>Where to save the JSON including class-metadata.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--sample_size</span> <span class="pre">&lt;N&gt;</span></code></p></td>
+<td><p>Only enhance the top N cues (for quick testing).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--force</span></code></p></td>
+<td><p>Ignore any existing cache and re-process from scratch.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--start</span> <span class="pre">&lt;I&gt;`,</span> <span class="pre">``--end</span> <span class="pre">&lt;J&gt;</span></code></p></td>
+<td><p>Slice the cue list by index before sampling.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--languages</span> <span class="pre">&lt;EN,ZH,…&gt;</span></code></p></td>
+<td><p>BabelNet query languages (default: EN,ZH,NL,ES).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--language_code</span> <span class="pre">&lt;code&gt;</span></code></p></td>
+<td><p>Subfolder for caching &amp; SME lookup (default: “en”).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cache-behavior">
+<h2>Cache Behavior<a class="headerlink" href="#cache-behavior" title="Link to this heading"></a></h2>
+<p>By default, intermediate results are cached</p>
+<ul class="simple">
+<li><p><strong>cue_dict.pkl</strong>: aggregated cue→association frequencies</p></li>
+<li><p><strong>annotation_dict.pkl</strong>: SME annotations applied</p></li>
+</ul>
+<p>Use <cite>–force</cite> to bypass the cache and re-run all stages.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>English – single cue “apple”</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>enhanceswow<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>/Cross_Lingual_2025/swow_data/SWOWEN.spellchecked.27-06-2022.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--annotation_csv<span class="w"> </span>/Cross_Lingual_2025/swow_data/coding.v7.COGSCI.en.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/apple.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json_with_metadata<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/apple_meta.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--sample_size<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Mandarin – cues “苹果” &amp; “宗教”</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>enhanceswow<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>/Cross_Lingual_2025/swow_data/SWOWZH.R55.20230424.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--annotation_csv<span class="w"> </span>/Cross_Lingual_2025/swow_data/coding.v7.COGSCI.zh_utf8.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/zh_sample.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json_with_metadata<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/zh_sample_meta.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--sample_size<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--language_code<span class="w"> </span>zh
+</pre></div>
+</div>
+</li>
+<li><p><strong>Dutch – cues “appel” &amp; “religie”</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>enhanceswow<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>/Cross_Lingual_2025/swow_data/SWOWNL.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--annotation_csv<span class="w"> </span>/Cross_Lingual_2025/swow_data/coding.v7.COGSCI.nl.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/nl_sample.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json_with_metadata<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/nl_sample_meta.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--sample_size<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--language_code<span class="w"> </span>nl
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Next: see <cite>aggregator.rst</cite> for how the raw SWOW CSV is ingested and converted into our <cite>Cue</cite>/<cite>Association</cite> data model.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="enhancer.html" class="btn btn-neutral float-left" title="Enhancer Module — Detailed Walk-through" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, MIT License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

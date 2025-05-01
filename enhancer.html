@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enhancer Module — Detailed Walk-through &mdash; Collaboration Documentation  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5fd91e7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage Guide" href="usage.html" />
+    <link rel="prev" title="Installation &amp; Prerequisites" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Collaboration Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#environment-setup">Environment setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Enhancer Module — Detailed Walk-through</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tf-idf-synset-ranking">TF-IDF Synset Ranking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#text-translation-helpers">Text &amp; Translation Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-enhancer-function">Main Enhancer Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#csv-sme-annotation">CSV &amp; SME Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#babelnet-synset-background">BabelNet Synset Background</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#command-line-invocation">Command-Line Invocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#cache-behavior">Cache Behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Collaboration Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Enhancer Module — Detailed Walk-through</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/enhancer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="enhancer-module-detailed-walk-through">
+<h1>Enhancer Module — Detailed Walk-through<a class="headerlink" href="#enhancer-module-detailed-walk-through" title="Link to this heading"></a></h1>
+<p>This document explains in detail how each function in <code class="docutils literal notranslate"><span class="pre">enhance_swow.enhancer</span></code> works, what data it consumes and produces, and why certain design choices (TF-IDF ranking, CSV handling, SME annotation capping) were made.</p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id1">Overview</a></p></li>
+<li><p><a class="reference internal" href="#tf-idf-synset-ranking" id="id2">TF-IDF Synset Ranking</a></p></li>
+<li><p><a class="reference internal" href="#text-translation-helpers" id="id3">Text &amp; Translation Helpers</a></p></li>
+<li><p><a class="reference internal" href="#main-enhancer-function" id="id4">Main Enhancer Function</a></p></li>
+<li><p><a class="reference internal" href="#csv-sme-annotation" id="id5">CSV &amp; SME Annotation</a></p></li>
+<li><p><a class="reference internal" href="#babelnet-synset-background" id="id6">BabelNet Synset Background</a></p></li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">enhancer</span></code> module performs three major tasks:</p>
+<ol class="arabic simple">
+<li><p><strong>Synset ranking &amp; disambiguation</strong>
+Choose the most relevant BabelNet synsets for a cue or association using TF-IDF on glosses.</p></li>
+<li><p><strong>Relation extraction</strong>
+Traverse outgoing edges of each chosen cue-synset to build:
+- Per-synset maps (<code class="docutils literal notranslate"><span class="pre">synset_relation_map</span></code>, <code class="docutils literal notranslate"><span class="pre">synset_edge_map</span></code>)
+- Global maps (<code class="docutils literal notranslate"><span class="pre">Relation_Map</span></code>, <code class="docutils literal notranslate"><span class="pre">Edge_Sense_Map</span></code>)</p></li>
+<li><p><strong>SME annotation &amp; association capping</strong>
+Load expert macro/micro-codes from CSV, apply them, and limit to 20 associations per cue, always keeping annotated ones.</p></li>
+</ol>
+<p>—</p>
+</section>
+<section id="tf-idf-synset-ranking">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">TF-IDF Synset Ranking</a><a class="headerlink" href="#tf-idf-synset-ranking" title="Link to this heading"></a></h2>
+<p><strong>How it works</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Collect glosses</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">glosses</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="n">s</span><span class="o">.</span><span class="n">main_gloss</span><span class="p">()</span><span class="o">.</span><span class="n">gloss</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">main_gloss</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+  <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">synsets</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Build “context string”</strong> from the cue word + its association list:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">context_string</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">context_words</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Fit a TF-IDF vectorizer</strong> on all glosses + the context:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">context_string</span><span class="p">]</span> <span class="o">+</span> <span class="n">glosses</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Compute cosine similarities</strong> between the context vector and each gloss vector.</p></li>
+<li><p><strong>Sort descending</strong> by similarity score and return the top 5 synset objects.</p></li>
+</ol>
+<p><strong>Why TF-IDF?</strong>
+- Glosses vary in length and terminology; TF-IDF captures which gloss contains the most context-relevant keywords.
+- Faster and deterministic compared to LLM prompting.
+- Leverages association responses as disambiguating context.</p>
+<p>—</p>
+</section>
+<section id="text-translation-helpers">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Text &amp; Translation Helpers</a><a class="headerlink" href="#text-translation-helpers" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Purpose:</strong> Normalize sense lemmas for JSON keys.</p></li>
+<li><p><strong>Steps:</strong>
+1. Remove parenthetical qualifiers: <code class="docutils literal notranslate"><span class="pre">&quot;(subject)&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;(general)&quot;</span></code>
+2. Convert underscores to spaces
+3. Lowercase and trim</p></li>
+</ul>
+<ul>
+<li><p><strong>Purpose:</strong> Pull only those translations in our target languages (e.g. EN, ZH, NL, ES).</p></li>
+<li><p><strong>Logic:</strong>
+1. BabelNet returns keys like <code class="docutils literal notranslate"><span class="pre">&quot;WIKI:ZH:Some_Title&quot;</span></code> → split on <code class="docutils literal notranslate"><span class="pre">&quot;:&quot;</span></code>
+2. Keep only those matching our <code class="docutils literal notranslate"><span class="pre">target_langs</span></code>
+3. Return a dict, e.g.:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;ZH&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;丈夫&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;大丈夫&quot;</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;EN&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;husband&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>—</p>
+</section>
+<section id="main-enhancer-function">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Main Enhancer Function</a><a class="headerlink" href="#main-enhancer-function" title="Link to this heading"></a></h2>
+<p><strong>Inputs</strong>:</p>
+<ul class="simple">
+<li><p><strong>cue_word</strong>: e.g. <code class="docutils literal notranslate"><span class="pre">&quot;apple&quot;</span></code></p></li>
+<li><p><strong>associations</strong>: a list of strings, e.g. <code class="docutils literal notranslate"><span class="pre">[&quot;fruit&quot;,&quot;red&quot;,&quot;juice&quot;]</span></code></p></li>
+<li><p><strong>cue_dict</strong>: original <code class="docutils literal notranslate"><span class="pre">Cue</span></code> object</p></li>
+<li><p><strong>languages</strong>: list of <code class="docutils literal notranslate"><span class="pre">babelnet.language.Language</span></code> enums</p></li>
+</ul>
+<p><strong>Output</strong>: a nested dict:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;cue_word&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Synsets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">id</span><span class="p">,</span><span class="w"> </span><span class="err">gloss</span><span class="p">,</span><span class="w"> </span><span class="err">pos</span><span class="p">,</span><span class="w"> </span><span class="err">…</span><span class="p">,</span><span class="w"> </span><span class="err">sy</span><span class="kc">nset</span><span class="err">_rela</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">_map</span><span class="p">,</span><span class="w"> </span><span class="err">sy</span><span class="kc">nset</span><span class="err">_edge_map</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;Relation_Map&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;targetID|||lemma&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RelationType&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;Edge_Sense_Map&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;RelationType&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;targetID|||lemma&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;associations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;fruit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;Synsets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">id</span><span class="p">,</span><span class="w"> </span><span class="err">gloss</span><span class="p">,</span><span class="w"> </span><span class="err">pos</span><span class="p">,</span><span class="w"> </span><span class="err">…</span><span class="p">,</span><span class="w"> </span><span class="err">cue_sy</span><span class="kc">nset</span><span class="err">_li</span><span class="kc">n</span><span class="err">ks</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="err">…</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Step-by-step</strong>:</p>
+<ol class="arabic">
+<li><p>Fetch all BabelNet synsets for the cue (<cite>bn.get_synsets</cite>).</p></li>
+<li><p>Rank &amp; select top 5 via TF-IDF (<cite>rank_synsets_by_gloss_similarity_tfidf</cite>).</p></li>
+<li><p>Initialize empty global maps.</p></li>
+<li><p><strong>For each selected cue synset</strong>:
+- Extract POS, main gloss, translations.
+- Filter outgoing edges by language.
+- For each edge → target synset → its senses:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Build a <strong>sense_key</strong>: <code class="docutils literal notranslate"><span class="pre">&quot;synsetID|||cleanedLemma&quot;</span></code></p></li>
+<li><p>Populate local &amp; global relation maps.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Append per-synset dict to <code class="docutils literal notranslate"><span class="pre">result[&quot;cue_word&quot;][&quot;Synsets&quot;]</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Assign global maps into <code class="docutils literal notranslate"><span class="pre">result[&quot;cue_word&quot;]</span></code>.</p></li>
+<li><p><strong>Process up to 20 associations</strong>:
+- TF-IDF rank each association’s synsets in its own context.
+- For each assoc synset, build metadata and trace back any matching cue synset via its <code class="docutils literal notranslate"><span class="pre">synset_relation_map</span></code>.
+- Record links in <code class="docutils literal notranslate"><span class="pre">cue_synset_links</span></code>.
+- Add to <code class="docutils literal notranslate"><span class="pre">result[&quot;associations&quot;]</span></code> if any synsets selected.</p></li>
+</ol>
+<p>—</p>
+</section>
+<section id="csv-sme-annotation">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">CSV &amp; SME Annotation</a><a class="headerlink" href="#csv-sme-annotation" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Tries multiple encodings: <code class="docutils literal notranslate"><span class="pre">utf-8</span></code>, <code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code>, <code class="docutils literal notranslate"><span class="pre">gb18030</span></code>, <code class="docutils literal notranslate"><span class="pre">utf-16</span></code>, <code class="docutils literal notranslate"><span class="pre">ISO-8859-1</span></code>.</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Read CSV into DataFrame.</p></li>
+<li><p>Normalize “cue.&lt;lang&gt;” and “response.&lt;lang&gt;” columns.</p></li>
+<li><p>Build a lookup:
+<code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">(cue,</span> <span class="pre">response)</span> <span class="pre">→</span> <span class="pre">{</span> <span class="pre">macroCode,</span> <span class="pre">microCode</span> <span class="pre">}</span> <span class="pre">}</span></code></p></li>
+<li><p>Apply codes to matching associations.</p></li>
+<li><p>For each cue, select up to 20 associations:
+- Include all annotated first, then highest-frequency others.</p></li>
+</ol>
+<p>—</p>
+</section>
+<section id="babelnet-synset-background">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">BabelNet Synset Background</a><a class="headerlink" href="#babelnet-synset-background" title="Link to this heading"></a></h2>
+<p>Our code uses these Synset primitives:</p>
+<ul class="simple">
+<li><p><strong>ID</strong> (<cite>synset.id</cite>), <strong>POS</strong> (<cite>synset.pos</cite>)</p></li>
+<li><p><strong>Gloss</strong> (<cite>synset.main_gloss()</cite>) and list of glosses</p></li>
+<li><p><strong>Senses</strong> (<cite>synset.senses(language)</cite>) with lemma, source, etc.</p></li>
+<li><p><strong>Outgoing edges</strong> (<cite>synset.outgoing_edges()</cite>) for graph navigation</p></li>
+<li><p><strong>Translations</strong> (<cite>synset.translations</cite>)</p></li>
+</ul>
+<p>We combine them to produce:</p>
+<ul class="simple">
+<li><p>Disambiguated, TF-IDF-ranked synsets</p></li>
+<li><p>Detailed relation maps (per-synset &amp; global)</p></li>
+<li><p>Multilingual coverage for cultural analysis</p></li>
+</ul>
+<p>—</p>
+<p>With this detailed breakdown, collaborators can:</p>
+<ul class="simple">
+<li><p>Reproduce or tweak each step</p></li>
+<li><p>Extend to new languages or ranking strategies</p></li>
+<li><p>Understand how cue–association context drives disambiguation</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation &amp; Prerequisites" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, MIT License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

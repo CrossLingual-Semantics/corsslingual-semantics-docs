@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; Collaboration Documentation  documentation</title>
+  <title>Installation &amp; Prerequisites &mdash; Collaboration Documentation  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5fd91e7" />
@@ -17,8 +18,10 @@
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Enhancer Module — Detailed Walk-through" href="enhancer.html" />
+    <link rel="prev" title="SWOW Enhancement Pipeline" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,10 +44,10 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Prerequisites</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#environment-setup">Environment setup</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation &amp; Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-setup">Environment setup</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="enhancer.html">Enhancer Module — Detailed Walk-through</a><ul>
@@ -79,8 +82,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Index</li>
+      <li class="breadcrumb-item active">Installation &amp; Prerequisites</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -88,17 +92,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <section id="installation-prerequisites">
+<h1>Installation &amp; Prerequisites<a class="headerlink" href="#installation-prerequisites" title="Link to this heading"></a></h1>
+<p>This section describes how to set up your environment and install all dependencies for the SWOW Enhancement Pipeline.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Python</strong> 3.8</p></li>
+<li><p><strong>Poetry</strong> (or pip + virtualenv)</p></li>
+<li><p><strong>BabelNet API key</strong> and a configuration file <cite>babelnet_conf.yml</cite></p></li>
+</ul>
+</section>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Clone the repository</strong> (replace with your path or URL):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/CrossLingual-Semantics/Enhance_SWOW
+<span class="nb">cd</span><span class="w"> </span>Enhance_SWOW
+</pre></div>
 </div>
+</li>
+<li><p><strong>Activate your virtual environment</strong>:</p>
+<ul>
+<li><p><strong>With Poetry</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>install
+poetry<span class="w"> </span>shell
+</pre></div>
+</div>
+</li>
+<li><p><strong>Or using venv + pip</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/home/unimelb.edu.au/manandharshr/.cache/pypoetry/virtualenvs/enhance-swow-XwaD2jyO-py3.8/bin/activate
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Configure BabelNet</strong>:</p>
+<p>Place your API key and preferences in <cite>conf/babelnet_conf.yml</cite>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">babelnet_api_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YOUR_KEY_HERE</span>
+<span class="nt">cache_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/cache</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Verify installation</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import babelnet; print(&#39;BabelNet:&#39;, babelnet.__version__)&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>You are now ready to run the SWOW Enhancement Pipeline. Proceed to the Usage Guide next.</p>
+</section>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="SWOW Enhancement Pipeline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="enhancer.html" class="btn btn-neutral float-right" title="Enhancer Module — Detailed Walk-through" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

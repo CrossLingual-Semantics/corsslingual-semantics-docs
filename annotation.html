@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>annotation.rst &mdash; Collaboration Documentation  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5fd91e7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Collaboration Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#environment-setup">Environment setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enhancer.html">Enhancer Module — Detailed Walk-through</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#tf-idf-synset-ranking">TF-IDF Synset Ranking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#text-translation-helpers">Text &amp; Translation Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#main-enhancer-function">Main Enhancer Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#csv-sme-annotation">CSV &amp; SME Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#babelnet-synset-background">BabelNet Synset Background</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#command-line-invocation">Command-Line Invocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#cache-behavior">Cache Behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Collaboration Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">annotation.rst</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/annotation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="annotation-rst">
+<h1>annotation.rst<a class="headerlink" href="#annotation-rst" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The <strong>annotation</strong> step integrates expert (SME)‐provided MacroCode and MicroCode labels
+into each cue’s associations and limits the number of associations per cue to a
+fixed maximum (default: 20), always preserving any that have SME labels.</p>
+</section>
+<section id="key-functions">
+<h2>Key Functions<a class="headerlink" href="#key-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">safe_read_csv(path:</span> <span class="pre">str)</span> <span class="pre">→</span> <span class="pre">pandas.DataFrame</span></span></dt>
+<dd><p>Read a CSV file whose text encoding may vary (e.g., Mandarin CSVs). Tries multiple
+encodings (<cite>utf-8</cite>, <cite>utf-8-sig</cite>, <cite>gb18030</cite>, <cite>utf-16</cite>, <cite>ISO-8859-1</cite>) in turn, and
+returns a DataFrame if successful.</p>
+<p><strong>Parameters</strong>
+- <cite>path</cite>: filesystem path to the CSV file.</p>
+<p><strong>Returns</strong>
+A <cite>pandas.DataFrame</cite> loaded with the file’s contents.</p>
+<p><strong>Raises</strong>
+- <cite>ValueError</cite> if no encoding succeeds.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">add_sme_annotations(cue_dict:</span> <span class="pre">dict[str,</span> <span class="pre">Cue],</span> <span class="pre">annotation_csv:</span> <span class="pre">str,</span> <span class="pre">language_code:</span> <span class="pre">str)</span> <span class="pre">→</span> <span class="pre">dict[str,</span> <span class="pre">Cue]</span></span></dt>
+<dd><p>Augment each <cite>Cue</cite>’s <cite>.associations</cite> with SME annotations (MacroCode &amp; MicroCode),
+then prune to at most 20 associations per cue, always including those with SME labels.</p>
+<p><strong>Parameters</strong>
+- <cite>cue_dict</cite>: mapping <cite>cue_word → Cue</cite> from the aggregator step.
+- <cite>annotation_csv</cite>: path to the SME annotation CSV.
+- <cite>language_code</cite>: e.g. <cite>“en”</cite>, <cite>“zh”</cite>, indicating which columns to read (<cite>cue.en</cite>, <cite>response.en</cite>).</p>
+<p><strong>Process</strong>
+1. <strong>Load CSV</strong> (via <cite>pd.read_csv(annotation_csv, encoding=”utf8”)</cite>).
+2. <strong>Clean &amp; Filter</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Drop rows missing either <cite>cue.&lt;language_code&gt;</cite> or <cite>response.&lt;language_code&gt;</cite>.</p></li>
+<li><p>Trim, lowercase both columns.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic" start="3">
+<li><p><strong>Build Lookup</strong>
+- Create <cite>annotation_dict[(cue_word, response)] = { “macroCode”:…, “microCode”:… }</cite>.</p></li>
+<li><p><strong>Apply Annotations</strong>
+- For each <cite>(cue, assoc)</cite> in <cite>cue_dict</cite>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If <cite>(cue.lower(), assoc.lower())</cite> in <cite>annotation_dict</cite>, add
+<cite>MacroCode</cite> and/or <cite>MicroCode</cite> via <cite>assoc.add_dimension(…)</cite>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Select Top-20 Associations</strong>
+- Split into <strong>annotated</strong> vs <strong>unannotated</strong> associations.
+- Sort unannotated by descending <cite>.frequency</cite>.
+- Concatenate annotated + unannotated, then slice <cite>[:20]</cite>.
+- Replace <cite>cue.associations</cite> with this reduced set.</p></li>
+</ol>
+<p><strong>Returns</strong>
+A new <cite>cue_dict</cite> containing only cues that have ≥1 association after filtering,
+each with at most 20 associations (all SME-annotated ones guaranteed included).</p>
+</dd></dl>
+
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">enhance_swow.aggregator</span><span class="w"> </span><span class="kn">import</span> <span class="n">aggregate_csv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enhance_swow.enhancer</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_sme_annotations</span>
+
+<span class="c1"># Step 1: build raw cue_dict</span>
+<span class="n">cue_dict</span> <span class="o">=</span> <span class="n">aggregate_csv</span><span class="p">(</span><span class="s2">&quot;swow_en.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 2: annotate (English annotations)</span>
+<span class="n">cue_dict</span> <span class="o">=</span> <span class="n">add_sme_annotations</span><span class="p">(</span><span class="n">cue_dict</span><span class="p">,</span>
+                               <span class="n">annotation_csv</span><span class="o">=</span><span class="s2">&quot;coding.v7.COGSCI.en.csv&quot;</span><span class="p">,</span>
+                               <span class="n">language_code</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="c1"># Now each Cue.associations has ≤20 entries,</span>
+<span class="c1"># and all with MacroCode/MicroCode are preserved.</span>
+</pre></div>
+</div>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>SME CSV must contain columns named <cite>cue.&lt;lang&gt;</cite> and <cite>response.&lt;lang&gt;</cite> (e.g. <cite>cue.zh</cite>).</p></li>
+<li><p>If your annotation file fails to load due to encoding, use <cite>safe_read_csv()</cite>
+in place of <cite>pd.read_csv</cite>.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, MIT License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
