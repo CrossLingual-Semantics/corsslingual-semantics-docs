@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌍 Welcome to CrossLingual Alignment Collaboration Documentation 🚀 &mdash; Collaboration Documentation  documentation</title>
+  <title>SWOW Enhancement Pipeline &mdash; Collaboration Documentation  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5fd91e7" />
@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="📌 Introduction" href="introduction.html" /> 
+    <link rel="next" title="Installation &amp; Prerequisites" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,18 +42,27 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">📖 Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">📌 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enhancing_swow.html">🌐 SWOW Enhancement Pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="enhancing_swow.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="enhancing_swow.html#core-classes">Core Classes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="enhancing_swow.html#dimension-class">📏 <strong>1. Dimension Class</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="enhancing_swow.html#association-class">🔗 <strong>2. Association Class</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="enhancing_swow.html#cue-class">🎧 <strong>3. Cue Class</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#environment-setup">Environment setup</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="enhancing_swow.html#filtering-enhancements">Filtering Enhancements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enhancer.html">Enhancer Module — Detailed Walk-through</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#tf-idf-synset-ranking">TF-IDF Synset Ranking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#text-translation-helpers">Text &amp; Translation Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#main-enhancer-function">Main Enhancer Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#csv-sme-annotation">CSV &amp; SME Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#babelnet-synset-background">BabelNet Synset Background</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#command-line-invocation">Command-Line Invocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#cache-behavior">Cache Behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#examples">Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -72,7 +81,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">🌍 Welcome to CrossLingual Alignment Collaboration Documentation 🚀</li>
+      <li class="breadcrumb-item active">SWOW Enhancement Pipeline</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,23 +91,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-crosslingual-alignment-collaboration-documentation">
-<h1>🌍 Welcome to CrossLingual Alignment Collaboration Documentation 🚀<a class="headerlink" href="#welcome-to-crosslingual-alignment-collaboration-documentation" title="Link to this heading"></a></h1>
-<p>This documentation provides an overview of the <strong>CrossLingual Alignment Collaboration</strong>, including details on <strong>Enhancing SWOW</strong>, methodology, and expected outcomes.</p>
-<p>📌 <strong>Key Topics Covered:</strong>
-- 🔍 Overview of the Collaboration
-- 🌐 Enhancing SWOW for Cross-Lingual Alignment
-- 📈 Methodology and Research Goals
-- 🚀 Installation and Usage Guide</p>
-<p>For detailed documentation, check out the sections below. ⬇️</p>
+  <section id="swow-enhancement-pipeline">
+<h1>SWOW Enhancement Pipeline<a class="headerlink" href="#swow-enhancement-pipeline" title="Link to this heading"></a></h1>
+<p>Welcome to the <strong>SWOW Enhancement Pipeline</strong> documentation. This guide will walk you through:</p>
+<ul class="simple">
+<li><p>Aggregating the SWOW cue–response data</p></li>
+<li><p>Enhancing cues and associations with BabelNet senses, relations, and TF-IDF–based disambiguation</p></li>
+<li><p>Applying SME (macro/micro) annotations</p></li>
+<li><p>Exporting results to JSON for downstream analysis</p></li>
+</ul>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">📖 Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">📌 Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enhancing_swow.html">🌐 SWOW Enhancement Pipeline</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="enhancing_swow.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="enhancing_swow.html#core-classes">Core Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="enhancing_swow.html#filtering-enhancements">Filtering Enhancements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#environment-setup">Environment setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enhancer.html">Enhancer Module — Detailed Walk-through</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#tf-idf-synset-ranking">TF-IDF Synset Ranking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#text-translation-helpers">Text &amp; Translation Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#main-enhancer-function">Main Enhancer Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#csv-sme-annotation">CSV &amp; SME Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancer.html#babelnet-synset-background">BabelNet Synset Background</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#command-line-invocation">Command-Line Invocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#cache-behavior">Cache Behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#examples">Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -109,7 +132,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="introduction.html" class="btn btn-neutral float-right" title="📌 Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation &amp; Prerequisites" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

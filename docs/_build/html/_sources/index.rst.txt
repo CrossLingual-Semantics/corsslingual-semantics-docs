@@ -1,20 +1,21 @@
-=========================================
-🌍 Welcome to CrossLingual Alignment Collaboration Documentation 🚀
-=========================================
+SWOW Enhancement Pipeline
+=========================
 
-This documentation provides an overview of the **CrossLingual Alignment Collaboration**, including details on **Enhancing SWOW**, methodology, and expected outcomes.
+Welcome to the **SWOW Enhancement Pipeline** documentation. This guide will walk you through:
 
-📌 **Key Topics Covered:**
-- 🔍 Overview of the Collaboration
-- 🌐 Enhancing SWOW for Cross-Lingual Alignment
-- 📈 Methodology and Research Goals
-- 🚀 Installation and Usage Guide
-
-For detailed documentation, check out the sections below. ⬇️
+- Aggregating the SWOW cue–response data  
+- Enhancing cues and associations with BabelNet senses, relations, and TF-IDF–based disambiguation  
+- Applying SME (macro/micro) annotations  
+- Exporting results to JSON for downstream analysis  
 
 .. toctree::
    :maxdepth: 2
-   :caption: 📖 Contents:
+   :caption: Contents:
 
-   introduction
-   enhancing_swow
+   installation
+   overview
+   aggregator
+   enhancer
+   annotations
+   usage
+
