@@ -1,9 +1,5 @@
-annotation.rst
-==============
-
-.. automodule:: enhance_swow.enhancer
-   :members: safe_read_csv, add_sme_annotations
-   :undoc-members:
+Annotation Module
+=================
 
 Overview
 --------
@@ -41,9 +37,9 @@ Key Functions
    - `language_code`: e.g. `"en"`, `"zh"`, indicating which columns to read (`cue.en`, `response.en`).
 
    **Process**  
-   1. **Load CSV** (via `pd.read_csv(annotation_csv, encoding="utf8")`).  
+   1. **Load CSV** .  
    2. **Clean & Filter**  
-      - Drop rows missing either `cue.<language_code>` or `response.<language_code>`.  
+      - Drop rows missing either cue-response.  
       - Trim, lowercase both columns.  
    3. **Build Lookup**  
       - Create `annotation_dict[(cue_word, response)] = { "macroCode":…, "microCode":… }`.  

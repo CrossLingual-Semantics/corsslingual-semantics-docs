@@ -15,7 +15,10 @@ author = 'Kabir, Geordie, Lea, Chunhua, Simon'
 
 # Enable better typography and layout
 extensions = [
-    "myst_parser",  # Markdown support
+    "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",   # Optional: better support for Google-style docstrings
+    "sphinx.ext.viewcode",   # Optional: link to source code
+    "myst_parser",   
     "sphinx_rtd_theme"
 ]
 

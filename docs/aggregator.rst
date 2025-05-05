@@ -4,12 +4,6 @@ Aggregator Module
 This module ingests the raw SWOW CSV file and converts it into our in-memory data model
 of `Cue` and `Association` objects.
 
-Source
-------
-
-:mod:`enhance_swow.aggregator`
-:   ``enhance_swow/aggregator.py``
-
 Overview
 --------
 
