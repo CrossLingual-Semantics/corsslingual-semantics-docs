@@ -19,7 +19,9 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage Guide" href="usage.html" />
+    <link rel="prev" title="Enhancer Module — Detailed Walk-through" href="enhancer.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,13 +44,20 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Prerequisites</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#environment-setup">Environment setup</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">📌 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aggregator.html">Aggregator Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aggregator.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregator.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregator.html#implementation-details">Implementation Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregator.html#notes">Notes</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="enhancer.html">Enhancer Module — Detailed Walk-through</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="enhancer.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="enhancer.html#tf-idf-synset-ranking">TF-IDF Synset Ranking</a></li>
@@ -56,6 +65,13 @@
 <li class="toctree-l2"><a class="reference internal" href="enhancer.html#main-enhancer-function">Main Enhancer Function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="enhancer.html#csv-sme-annotation">CSV &amp; SME Annotation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="enhancer.html#babelnet-synset-background">BabelNet Synset Background</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Annotation Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-functions">Key Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
@@ -83,7 +99,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Annotation Module</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/annotation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/annotations.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -125,11 +141,11 @@ then prune to at most 20 associations per cue, always including those with SME l
 - <cite>annotation_csv</cite>: path to the SME annotation CSV.
 - <cite>language_code</cite>: e.g. <cite>“en”</cite>, <cite>“zh”</cite>, indicating which columns to read (<cite>cue.en</cite>, <cite>response.en</cite>).</p>
 <p><strong>Process</strong>
-1. <strong>Load CSV</strong> (via <cite>pd.read_csv(annotation_csv, encoding=”utf8”)</cite>).
+1. <strong>Load CSV</strong> .
 2. <strong>Clean &amp; Filter</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Drop rows missing either <cite>cue.&lt;language_code&gt;</cite> or <cite>response.&lt;language_code&gt;</cite>.</p></li>
+<li><p>Drop rows missing either cue-response.</p></li>
 <li><p>Trim, lowercase both columns.</p></li>
 </ul>
 </div></blockquote>
@@ -188,7 +204,10 @@ in place of <cite>pd.read_csv</cite>.</p></li>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="enhancer.html" class="btn btn-neutral float-left" title="Enhancer Module — Detailed Walk-through" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
