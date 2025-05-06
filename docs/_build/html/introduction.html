@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📌 Introduction &mdash; Collaboration Documentation  documentation</title>
+  <title>🌍 Overview &mdash; Collaboration Documentation  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5fd91e7" />
@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Enhancer Module — Detailed Walk-through" href="enhancer.html" />
+    <link rel="next" title="Aggregator Module" href="aggregator.html" />
     <link rel="prev" title="Installation &amp; Prerequisites" href="installation.html" /> 
 </head>
 
@@ -50,7 +50,20 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html#environment-setup">Environment setup</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">📌 Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">🌍 Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-has-been-done-so-far">✅ What Has Been Done So Far</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-we-are-doing-next">🚧 What We Are Doing Next</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technologies-tools">🛠️ Technologies &amp; Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aggregator.html">Aggregator Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aggregator.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregator.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregator.html#implementation-details">Implementation Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aggregator.html#notes">Notes</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="enhancer.html">Enhancer Module — Detailed Walk-through</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="enhancer.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="enhancer.html#tf-idf-synset-ranking">TF-IDF Synset Ranking</a></li>
@@ -58,6 +71,13 @@
 <li class="toctree-l2"><a class="reference internal" href="enhancer.html#main-enhancer-function">Main Enhancer Function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="enhancer.html#csv-sme-annotation">CSV &amp; SME Annotation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="enhancer.html#babelnet-synset-background">BabelNet Synset Background</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="annotations.html">Annotation Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#key-functions">Key Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#notes">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
@@ -83,7 +103,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">📌 Introduction</li>
+      <li class="breadcrumb-item active">🌍 Overview</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -93,33 +113,54 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="introduction">
-<h1>📌 Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
-<p>### 🌍 Overview of the CrossLingual Alignment Collaboration</p>
-<p>The <strong>CrossLingual Alignment Collaboration</strong> explores <strong>semantic relationships between words across languages</strong> using <strong>Small World of Words (SWOW)</strong> data.</p>
-<p>🎯 <strong>Our Goal:</strong>
-To improve <strong>cross-lingual semantic equivalence</strong> using structured <strong>word associations</strong> instead of only relying on pretrained models.</p>
-<p>🔹 <strong>Project Phases:</strong>
-1. <strong>🛠️ Building the Pipeline</strong></p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Extracting <strong>cross-lingual word associations</strong> from SWOW.</p></li>
-<li><p>Defining <strong>semantic similarity metrics</strong>.</p></li>
+  <section id="overview">
+<h1>🌍 Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This project is part of the <strong>CrossLingual Alignment Collaboration</strong>, which explores <strong>semantic equivalence across languages</strong> using the <strong>Small World of Words (SWOW)</strong> dataset.</p>
+<p>Unlike standard approaches that rely solely on multilingual embeddings from pretrained models, our work enhances <strong>interpretable cross-lingual comparison</strong> through <strong>explicit word associations</strong> and <strong>linguistic annotations</strong>.</p>
+<p>—</p>
+</section>
+<section id="what-has-been-done-so-far">
+<h2>✅ What Has Been Done So Far<a class="headerlink" href="#what-has-been-done-so-far" title="Link to this heading"></a></h2>
+<p>We have completed the <strong>first major phase</strong> of the project — enhancing the SWOW dataset with the following:</p>
+<ul class="simple">
+<li><p><strong>Cue–Association Aggregation:</strong> Extracting and structuring cue→association mappings from raw CSV files.</p></li>
+<li><p><strong>BabelNet Augmentation:</strong> Enriching words with:
+- Part-of-Speech (POS)
+- Lexical Relations
+- Sense mappings (BabelNet IDs &amp; glosses)</p></li>
+<li><p><strong>SME Annotations:</strong> Applying expert-labeled MacroCode and MicroCode dimensions.</p></li>
+<li><p><strong>Filtering:</strong> Limiting associations per cue to the top 20 (preserving annotated items), and removing associations without dimensions.</p></li>
+<li><p><strong>Exporting JSON:</strong> Final cue dictionaries saved in both clean and metadata-rich formats.</p></li>
 </ul>
-</div></blockquote>
-<ol class="arabic simple" start="2">
-<li><p><strong>📊 Developing a Web Interface</strong>
-- Using <strong>Plotly-based visualizations</strong>.
-- Integrating into <strong>Squiz Matrix CMS</strong> for university research.</p></li>
-<li><p><strong>📄 Research &amp; Publication</strong>
-- Enhancing the SWOW dataset with <strong>linguistic annotations</strong>.
-- Comparing <strong>association-based embeddings vs. pretrained embeddings</strong>.
-- Publishing findings in NLP &amp; Linguistics venues.</p></li>
-</ol>
-<p>🧠 <strong>Key Technologies Used:</strong>
-- SWOW Dataset
-- BabelNet (for sense mapping &amp; POS tagging)
-- Python (Sphinx, NLP libraries)</p>
+<p>This enhanced dataset forms the basis for deeper <strong>semantic alignment comparisons</strong> between languages.</p>
+<p>—</p>
+</section>
+<section id="what-we-are-doing-next">
+<h2>🚧 What We Are Doing Next<a class="headerlink" href="#what-we-are-doing-next" title="Link to this heading"></a></h2>
+<p>The <strong>next phase</strong> will focus on <strong>comparing the enhanced outputs</strong> for a given cue across multiple languages.</p>
+<p>For example:
+- Compare <cite>“apple”</cite> in English vs Chinese or Dutch
+- Analyze which associations are shared, diverge, or align semantically
+- Visualize these comparisons to uncover cultural and cognitive semantic shifts</p>
+<p>We plan to develop a <strong>Plotly-based interactive web application</strong> for:
+- Selecting a cue word
+- Viewing its associated concepts across languages
+- Highlighting dimension-level similarities and differences</p>
+<p>Ultimately, this will help build interpretable, culturally aware semantic models — and form the foundation for academic dissemination.</p>
+<p>—</p>
+</section>
+<section id="technologies-tools">
+<h2>🛠️ Technologies &amp; Tools<a class="headerlink" href="#technologies-tools" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Datasets:</strong> SWOW multilingual data</p></li>
+<li><p><strong>Lexical Resources:</strong> BabelNet</p></li>
+<li><p><strong>Implementation:</strong> Python</p></li>
+<li><p><strong>Documentation:</strong> Sphinx</p></li>
+<li><p><strong>Planned Visualisation:</strong> Plotly + university CMS (Squiz Matrix)</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -127,7 +168,7 @@ To improve <strong>cross-lingual semantic equivalence</strong> using structured 
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installation.html" class="btn btn-neutral float-left" title="Installation &amp; Prerequisites" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="enhancer.html" class="btn btn-neutral float-right" title="Enhancer Module — Detailed Walk-through" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="aggregator.html" class="btn btn-neutral float-right" title="Aggregator Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
