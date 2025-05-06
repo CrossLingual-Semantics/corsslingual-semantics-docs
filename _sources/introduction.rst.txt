@@ -1,28 +1,58 @@
-📌 Introduction
-==============
+====================
+🌍 Overview
+====================
 
-### 🌍 Overview of the CrossLingual Alignment Collaboration
+Introduction
+============
 
-The **CrossLingual Alignment Collaboration** explores **semantic relationships between words across languages** using **Small World of Words (SWOW)** data.
+This project is part of the **CrossLingual Alignment Collaboration**, which explores **semantic equivalence across languages** using the **Small World of Words (SWOW)** dataset.
 
-🎯 **Our Goal:**  
-To improve **cross-lingual semantic equivalence** using structured **word associations** instead of only relying on pretrained models.
+Unlike standard approaches that rely solely on multilingual embeddings from pretrained models, our work enhances **interpretable cross-lingual comparison** through **explicit word associations** and **linguistic annotations**.
 
-🔹 **Project Phases:**
-1. **🛠️ Building the Pipeline**  
-   - Extracting **cross-lingual word associations** from SWOW.
-   - Defining **semantic similarity metrics**.
-   
-2. **📊 Developing a Web Interface**  
-   - Using **Plotly-based visualizations**.
-   - Integrating into **Squiz Matrix CMS** for university research.
+---
 
-3. **📄 Research & Publication**  
-   - Enhancing the SWOW dataset with **linguistic annotations**.
-   - Comparing **association-based embeddings vs. pretrained embeddings**.
-   - Publishing findings in NLP & Linguistics venues.
+✅ What Has Been Done So Far
+============================
 
-🧠 **Key Technologies Used:**
-- SWOW Dataset
-- BabelNet (for sense mapping & POS tagging)
-- Python (Sphinx, NLP libraries)
+We have completed the **first major phase** of the project — enhancing the SWOW dataset with the following:
+
+- **Cue–Association Aggregation:** Extracting and structuring cue→association mappings from raw CSV files.
+- **BabelNet Augmentation:** Enriching words with:
+  - Part-of-Speech (POS)
+  - Lexical Relations
+  - Sense mappings (BabelNet IDs & glosses)
+- **SME Annotations:** Applying expert-labeled MacroCode and MicroCode dimensions.
+- **Filtering:** Limiting associations per cue to the top 20 (preserving annotated items), and removing associations without dimensions.
+- **Exporting JSON:** Final cue dictionaries saved in both clean and metadata-rich formats.
+
+This enhanced dataset forms the basis for deeper **semantic alignment comparisons** between languages.
+
+---
+
+🚧 What We Are Doing Next
+=========================
+
+The **next phase** will focus on **comparing the enhanced outputs** for a given cue across multiple languages.
+
+For example:
+- Compare `"apple"` in English vs Chinese or Dutch
+- Analyze which associations are shared, diverge, or align semantically
+- Visualize these comparisons to uncover cultural and cognitive semantic shifts
+
+We plan to develop a **Plotly-based interactive web application** for:
+- Selecting a cue word
+- Viewing its associated concepts across languages
+- Highlighting dimension-level similarities and differences
+
+Ultimately, this will help build interpretable, culturally aware semantic models — and form the foundation for academic dissemination.
+
+---
+
+🛠️ Technologies & Tools
+========================
+
+- **Datasets:** SWOW multilingual data
+- **Lexical Resources:** BabelNet
+- **Implementation:** Python
+- **Documentation:** Sphinx
+- **Planned Visualisation:** Plotly + university CMS (Squiz Matrix)
