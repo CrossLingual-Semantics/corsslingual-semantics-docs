@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SWOW Enhancement Pipeline &mdash; Collaboration Documentation  documentation</title>
+  <title>🌍 Overview &mdash; Collaboration Documentation  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f5fd91e7" />
@@ -20,7 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation &amp; Prerequisites" href="installation.html" /> 
+    <link rel="next" title="Aggregator Module" href="aggregator.html" />
+    <link rel="prev" title="Installation &amp; Prerequisites" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,7 +32,7 @@
 
           
           
-          <a href="#" class="icon icon-home">
+          <a href="index.html" class="icon icon-home">
             Collaboration Documentation
           </a>
 <div role="search">
@@ -43,16 +44,16 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Prerequisites</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#environment-setup">Environment setup</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">🌍 Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#what-has-been-done-so-far">✅ What Has Been Done So Far</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#what-we-are-doing-next">🚧 What We Are Doing Next</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#technologies-tools">🛠️ Technologies &amp; Tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">🌍 Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-has-been-done-so-far">✅ What Has Been Done So Far</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-we-are-doing-next">🚧 What We Are Doing Next</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technologies-tools">🛠️ Technologies &amp; Tools</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="aggregator.html">Aggregator Module</a><ul>
@@ -94,17 +95,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">Collaboration Documentation</a>
+          <a href="index.html">Collaboration Documentation</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">SWOW Enhancement Pipeline</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">🌍 Overview</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/overview.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -112,69 +113,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="swow-enhancement-pipeline">
-<h1>SWOW Enhancement Pipeline<a class="headerlink" href="#swow-enhancement-pipeline" title="Link to this heading"></a></h1>
-<p>Welcome to the <strong>SWOW Enhancement Pipeline</strong> documentation. This guide will walk you through:</p>
+  <section id="overview">
+<h1>🌍 Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
+<p>This project is part of the <strong>CrossLingual Alignment Collaboration</strong>, which explores <strong>semantic equivalence across languages</strong> using the <strong>Small World of Words (SWOW)</strong> dataset.</p>
+<p>Unlike standard approaches that rely solely on multilingual embeddings from pretrained models, our work enhances <strong>interpretable cross-lingual comparison</strong> through <strong>explicit word associations</strong> and <strong>linguistic annotations</strong>.</p>
+<p>—</p>
+<section id="what-has-been-done-so-far">
+<h2>✅ What Has Been Done So Far<a class="headerlink" href="#what-has-been-done-so-far" title="Link to this heading"></a></h2>
+<p>We have completed the <strong>first major phase</strong> of the project — enhancing the SWOW dataset with the following:</p>
 <ul class="simple">
-<li><p>Aggregating the SWOW cue–response data</p></li>
-<li><p>Enhancing cues and associations with BabelNet senses, relations, and TF-IDF–based disambiguation</p></li>
-<li><p>Applying SME (macro/micro) annotations</p></li>
-<li><p>Exporting results to JSON for downstream analysis</p></li>
+<li><p><strong>Cue–Association Aggregation:</strong> Extracting and structuring cue→association mappings from raw CSV files.</p></li>
+<li><p><strong>BabelNet Augmentation:</strong> Enriching words with:
+- Part-of-Speech (POS)
+- Lexical Relations
+- Sense mappings (BabelNet IDs &amp; glosses)</p></li>
+<li><p><strong>SME Annotations:</strong> Applying expert-labeled MacroCode and MicroCode dimensions.</p></li>
+<li><p><strong>Filtering:</strong> Limiting associations per cue to the top 20 (preserving annotated items), and removing associations without dimensions.</p></li>
+<li><p><strong>Exporting JSON:</strong> Final cue dictionaries saved in both clean and metadata-rich formats.</p></li>
 </ul>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation &amp; Prerequisites</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#environment-setup">Environment setup</a></li>
+<p>This enhanced dataset forms the basis for deeper <strong>semantic alignment comparisons</strong> between languages.</p>
+<p>—</p>
+</section>
+<section id="what-we-are-doing-next">
+<h2>🚧 What We Are Doing Next<a class="headerlink" href="#what-we-are-doing-next" title="Link to this heading"></a></h2>
+<p>The <strong>next phase</strong> will focus on <strong>comparing the enhanced outputs</strong> for a given cue across multiple languages.</p>
+<p>For example:
+- Compare <cite>“apple”</cite> in English vs Chinese or Dutch
+- Analyze which associations are shared, diverge, or align semantically
+- Visualize these comparisons to uncover cultural and cognitive semantic shifts</p>
+<p>We plan to develop a <strong>Plotly-based interactive web application</strong> for:
+- Selecting a cue word
+- Viewing its associated concepts across languages
+- Highlighting dimension-level similarities and differences</p>
+<p>Ultimately, this will help build interpretable, culturally aware semantic models — and form the foundation for academic dissemination.</p>
+<p>—</p>
+</section>
+<section id="technologies-tools">
+<h2>🛠️ Technologies &amp; Tools<a class="headerlink" href="#technologies-tools" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Datasets:</strong> SWOW multilingual data</p></li>
+<li><p><strong>Lexical Resources:</strong> BabelNet</p></li>
+<li><p><strong>Implementation:</strong> Python</p></li>
+<li><p><strong>Documentation:</strong> Sphinx</p></li>
+<li><p><strong>Planned Visualisation:</strong> Plotly + university CMS (Squiz Matrix)</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">🌍 Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#what-has-been-done-so-far">✅ What Has Been Done So Far</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#what-we-are-doing-next">🚧 What We Are Doing Next</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#technologies-tools">🛠️ Technologies &amp; Tools</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="aggregator.html">Aggregator Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="aggregator.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="aggregator.html#functions">Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="aggregator.html#implementation-details">Implementation Details</a></li>
-<li class="toctree-l2"><a class="reference internal" href="aggregator.html#notes">Notes</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="enhancer.html">Enhancer Module — Detailed Walk-through</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="enhancer.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="enhancer.html#tf-idf-synset-ranking">TF-IDF Synset Ranking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="enhancer.html#text-translation-helpers">Text &amp; Translation Helpers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="enhancer.html#main-enhancer-function">Main Enhancer Function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="enhancer.html#csv-sme-annotation">CSV &amp; SME Annotation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="enhancer.html#babelnet-synset-background">BabelNet Synset Background</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="annotations.html">Annotation Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="annotations.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="annotations.html#key-functions">Key Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="annotations.html#example">Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="annotations.html#notes">Notes</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#sample-yaml-file">Sample YAML file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#general-command-line-options">General Command-Line Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#examples">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#alternative-random-sampling">Alternative: Random Sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#notes">Notes</a></li>
-</ul>
-</li>
-</ul>
-</div>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="installation.html" class="btn btn-neutral float-right" title="Installation &amp; Prerequisites" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation &amp; Prerequisites" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="aggregator.html" class="btn btn-neutral float-right" title="Aggregator Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
