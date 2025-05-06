@@ -2,9 +2,6 @@
 🌍 Overview
 ====================
 
-Introduction
-============
-
 This project is part of the **CrossLingual Alignment Collaboration**, which explores **semantic equivalence across languages** using the **Small World of Words (SWOW)** dataset.
 
 Unlike standard approaches that rely solely on multilingual embeddings from pretrained models, our work enhances **interpretable cross-lingual comparison** through **explicit word associations** and **linguistic annotations**.

@@ -13,7 +13,7 @@ Welcome to the **SWOW Enhancement Pipeline** documentation. This guide will walk
    :caption: Contents:
 
    installation
-   introduction
+   overview
    aggregator
    enhancer
    annotations
