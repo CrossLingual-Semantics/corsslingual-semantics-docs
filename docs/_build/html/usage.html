@@ -115,7 +115,7 @@
   <section id="usage-guide">
 <h1>Usage Guide<a class="headerlink" href="#usage-guide" title="Link to this heading"></a></h1>
 <p>This page shows how to run the SWOW enhancement pipeline (<cite>enhanceswow</cite>) in English, Mandarin (Chinese), and Dutch.
-It also demonstrates how to restrict processing to a fixed set of cue words via a simple YAML file.</p>
+It also demonstrates how to restrict processing to a fixed set of cue words via a simple YAML file, disable expensive edge extraction, and emit CSV summaries.</p>
 <section id="sample-yaml-file">
 <h2>Sample YAML file<a class="headerlink" href="#sample-yaml-file" title="Link to this heading"></a></h2>
 <p>Create a YAML file (e.g. <cite>sampled_cues.yaml</cite>) listing the exact cue words you wish to process. You can use either a YAML list:</p>
@@ -152,48 +152,59 @@ Two-letter language code, which controls both cache subfolder and annotation col
 Path to a YAML file listing exact cues to process (overrides <code class="docutils literal notranslate"><span class="pre">--sample-size</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--sample-size</span></code>
 If you prefer random sampling, specify the number of cues to pick at random.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--force</span></code>
-Force reprocessing of both aggregation and annotation, even if cache exists.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--start</span></code>, <code class="docutils literal notranslate"><span class="pre">--end</span></code>
 Slice the sorted cue list by index range (zero-based) before sampling.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--force</span></code>
+Force reprocessing of both aggregation and annotation, even if cache exists.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--skip-edges</span></code>
+Disable BabelNet edge‐relation extraction (speeds up processing, drops Relation/EdgeSense maps).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--create-csv</span></code>
+Directory in which to write two UTF-8 CSV summaries:
+<code class="docutils literal notranslate"><span class="pre">cues_overview.csv</span></code> (cue-level synset &amp; sense table) and
+<code class="docutils literal notranslate"><span class="pre">associations_overview.csv</span></code> (association-level synset &amp; sense table).</p></li>
 </ul>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <ol class="arabic">
-<li><p>Process only “apple”, “religion” and “culture” in English:</p>
+<li><p>Process only “apple”, “religion” and “culture” in English, disable edges, and emit CSVs:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>enhanceswow<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--input<span class="w"> </span>/Cross_Lingual_2025/swow_data/SWOWEN.spellchecked.27-06-2022.csv<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--annotation_csv<span class="w"> </span>/Cross_Lingual_2025/swow_data/coding.v7.COGSCI.en.csv<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--output_json<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/en_sample_en.json<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--output_json_with_metadata<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/en_sample_en_meta.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/en_sample.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json_with_metadata<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/en_sample_meta.json<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--cache-dir<span class="w"> </span>/Cross_Lingual_2025/cache<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--language_code<span class="w"> </span>en<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--sample-cues<span class="w"> </span>/Cross_Lingual_2025/sampled_cues.yaml
+<span class="w">  </span>--sample-cues<span class="w"> </span>/Cross_Lingual_2025/cache/sampled_cues.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--skip-edges<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--create-csv<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data
 </pre></div>
 </div>
 </li>
-<li><p>Run the same cues in Mandarin:</p>
+<li><p>Run the same cues in Mandarin, without CSV output:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>enhanceswow<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--input<span class="w"> </span>/Cross_Lingual_2025/swow_data/SWOWZH.R55.20230424.csv<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--annotation_csv<span class="w"> </span>/Cross_Lingual_2025/swow_data/annotated-chinese-utf8.csv<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--output_json<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/zh_sample_zh.json<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--output_json_with_metadata<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/zh_sample_zh_meta.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/zh_sample.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json_with_metadata<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/zh_sample_meta.json<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--cache-dir<span class="w"> </span>/Cross_Lingual_2025/cache<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--language_code<span class="w"> </span>zh<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--sample-cues<span class="w"> </span>/Cross_Lingual_2025/sampled_cues.yaml
+<span class="w">  </span>--sample-cues<span class="w"> </span>/Cross_Lingual_2025/cache/sampled_cues.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--skip-edges
 </pre></div>
 </div>
 </li>
-<li><p>And in Dutch:</p>
+<li><p>And in Dutch, randomly sampling 5 cues, with CSVs:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>enhanceswow<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--input<span class="w"> </span>/Cross_Lingual_2025/swow_data/SWOWNL.csv<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--annotation_csv<span class="w"> </span>/Cross_Lingual_2025/swow_data/coding.v7.COGSCI.nl.csv<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--output_json<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/nl_sample_nl.json<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--output_json_with_metadata<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/nl_sample_nl_meta.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/nl_sample.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_json_with_metadata<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data/nl_sample_meta.json<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--cache-dir<span class="w"> </span>/Cross_Lingual_2025/cache<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--language_code<span class="w"> </span>nl<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--sample-cues<span class="w"> </span>/Cross_Lingual_2025/sampled_cues.yaml
+<span class="w">  </span>--sample-size<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--skip-edges<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--create-csv<span class="w"> </span>/Cross_Lingual_2025/enhanced_swow_data
 </pre></div>
 </div>
 </li>
@@ -218,7 +229,8 @@ Slice the sorted cue list by index range (zero-based) before sampling.</p></li>
 <ul class="simple">
 <li><p>The same cache directory is used for all languages; a subfolder named by <code class="docutils literal notranslate"><span class="pre">&lt;language_code&gt;</span></code> (e.g. <cite>cache/en</cite>, <cite>cache/zh</cite>, <cite>cache/nl</cite>) keeps each language’s data separate.</p></li>
 <li><p>By fixing the cue list via YAML, you ensure that all languages process exactly the same set of words—ideal for cross-lingual comparison.</p></li>
-<li><p>Using random sampling is a quick way to spot-check different cues without maintaining a YAML file.</p></li>
+<li><p>Disabling edges with <code class="docutils literal notranslate"><span class="pre">--skip-edges</span></code> speeds up BabelNet queries at the cost of dropping relation maps.</p></li>
+<li><p>CSV summaries (when using <code class="docutils literal notranslate"><span class="pre">--create-csv</span></code>) are UTF-8-encoded and structured hierarchically: one synset row per “Type=Synset” followed by one “Type=Sense” row per sense.</p></li>
 </ul>
 </section>
 </section>
